@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+<html lang="en"></html>
+  <title>Todo App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/stylesheets/style.css" type="text/css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <script
+    src="https://kit.fontawesome.com/b22cc2033a.js"
+    crossorigin="anonymous"
+  ></script>
+</head>
+<body>
+  <div class="todo-container">
+    <h2>To-Do List</h2>
+    <div class="todo">
+      <form action="" method="POST" class="todo-header">
+        <input type="text" name="content" />
+        <button type="submit"><span class="fas fa-plus"></span></button>
+      </form>
+      <ul class="todo-list">
+        <% todoTasks.forEach(details => { %> <% if (details._id == idTask) { %>
+        <li class="todo-list-item">
+          <form
+            action="/edit/<%= details._id %>?page=<%= page %>&&sorted=<%= sorted %>"
+            method="POST"
+          >
+            <input type="text" value="<%= details.content %>" name="content"/>
+            <button type="submit">Confirm</button>
+            <a
+              href="/cancelEdit?page=<%= page %>&&sorted=<%= sorted %>"
+              class="cancel"
+              >Cancel</a
+            >
+          </form>
+        </li>
+        <% } else { %>
+        <li class="todo-list-item un-focused">
+          <div class="todo-list-item-name"><%= details.content %></div>
+        </li>
+        <% } %> <% }) %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
