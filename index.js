@@ -12,7 +12,8 @@ mongoose.set("useFindAndModify", false);
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
+  (err) => {
+    // fånga err med if innan man kopplas vidare till appen
     console.log("Connected to my database");
     app.listen(8000, () => {
       console.log("Server started on 8000");
